@@ -12,11 +12,18 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@prisma/client": "^5.15.1",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.7",
     "next": "15.0.0-canary.40",
+    "prisma": "^5.15.1",
     "react": "19.0.0-rc-3563387fe3-20240621",
     "react-dom": "19.0.0-rc-3563387fe3-20240621",
+    "resend": "^3.3.0",
     "tailwind-merge": "^2.3.0",
-    "tailwind-variants": "^0.2.1"
+    "tailwind-variants": "^0.2.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
@@ -29,6 +36,8 @@
     "@storybook/nextjs": "^8.1.10",
     "@storybook/react": "^8.1.10",
     "@storybook/test": "^8.1.10",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
