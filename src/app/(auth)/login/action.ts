@@ -3,10 +3,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import z from "zod";
 
 import { UserServices } from "@/services/user.services";
-import { redirect } from "next/navigation";
 
 const loginSchema = z.object({
   email: z.string().email(),
