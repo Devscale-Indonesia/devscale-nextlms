@@ -35,7 +35,7 @@ export async function registerAction(prevState: unknown, formData: FormData) {
   // input > db
   try {
     const hashPassword = await bcrypt.hash(password, 13);
-    const user = await UserServices.createUser({ name, email, password: hashPassword });
+    const user = await UserServices.createUser({ name, email, password: hashPassword, isVerified: false });
     const verificationCode = generateVerificationCode();
 
     await UserServices.createVerificationCode(user.id, verificationCode);

@@ -3,12 +3,13 @@ import { User } from "@prisma/client";
 import prisma from "@/utils/prisma";
 
 export const UserServices = {
-  createUser: async (user: Pick<User, "name" | "email" | "password">) => {
+  createUser: async (user: Pick<User, "name" | "email" | "password" | "isVerified">) => {
     const newUser = await prisma.user.create({
       data: {
         name: user.name,
         email: user.email,
         password: user.password,
+        isVerified: user.isVerified,
       },
     });
     return newUser;

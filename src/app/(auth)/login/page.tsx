@@ -6,6 +6,7 @@ import { useActionState } from "react";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 
+import { SocialLoginBtn } from "../comp.social-login";
 import { loginAction } from "./action";
 
 export default function Page() {
@@ -26,6 +27,7 @@ export default function Page() {
         {state?.status === "success" && state.message !== "" ? <div className="msg msg-success">{state.message}</div> : null}
         {state?.status === "error" && state.message !== "" ? <div className="msg msg-error">{state.message}</div> : null}
       </form>
+      <SocialLoginBtn />
       <section>
         <p>
           Don&apos;t have an account ? <Link href="/register">Register</Link>
