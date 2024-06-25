@@ -23,4 +23,73 @@ export const CourseServices = {
       console.log(error);
     }
   },
+
+  createSection: async (courseId: string) => {
+    await prisma.section.create({
+      data: {
+        title: "New section",
+        courseId,
+      },
+    });
+  },
+
+  createLesson: async (sectionId: string) => {
+    const totalLesson = await prisma.lesson.count({
+      where: {
+        sectionId,
+      },
+    });
+
+    await prisma.lesson.create({
+      data: {
+        sectionId,
+        title: `New lesson ${(totalLesson + 1).toString()}`,
+        slug: slugify(`New lesson ${totalLesson.toString()}`, { lower: true }),
+        videoUrl: "-",
+        index: totalLesson,
+      },
+    });
+  },
+
+  getAllCourses: async () => {
+    const data = await prisma.course.findMany({
+      orderBy: {
+        title: "asc",
+      },
+    });
+
+    return data;
+  },
+
+  getCourseDetail: async (idOrSlug: string) => {
+    const data = await prisma.course.findFirst({
+      where: {
+        OR: [
+          {
+            id: idOrSlug,
+          },
+          {
+            slug: idOrSlug,
+          },
+        ],
+      },
+      include: {
+        sections: {
+          include: {
+            lessons: true,
+          },
+        },
+      },
+    });
+
+    return data;
+  },
+
+  deleteLesson: async (lessonId: string) => {
+    await prisma.lesson.delete({
+      where: {
+        id: lessonId,
+      },
+    });
+  },
 };
