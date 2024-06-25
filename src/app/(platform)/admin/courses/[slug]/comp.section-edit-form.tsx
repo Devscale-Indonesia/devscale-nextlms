@@ -7,7 +7,6 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { openSectionEditModalAtom, sectionDetailAtom } from "@/context/atom";
 
-import { updateLessonAction } from "./action.update-lesson";
 import { updateSectionAction } from "./action.update-section";
 
 export const SectionEditForm = () => {
