@@ -5,7 +5,9 @@ import { Button } from "@/components/button";
 import { CourseServices } from "@/services/course.services";
 
 import { AddSectionBtn } from "./comp.add-section";
+import { LessonEditForm } from "./comp.lesson-edit-form";
 import { SectionCard } from "./comp.section-card";
+import { SectionEditForm } from "./comp.section-edit-form";
 
 interface Props {
   params: {
@@ -37,6 +39,8 @@ export default async function Page({ params }: Props) {
           })}
         </section>
       </section>
+      <LessonEditForm />
+      <SectionEditForm />
     </main>
   );
 }

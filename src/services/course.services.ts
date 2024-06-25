@@ -1,4 +1,4 @@
-import { Course } from "@prisma/client";
+import { Course, Lesson, Section } from "@prisma/client";
 import slugify from "slugify";
 
 import prisma from "@/utils/prisma";
@@ -25,10 +25,17 @@ export const CourseServices = {
   },
 
   createSection: async (courseId: string) => {
+    const totalSection = await prisma.section.count({
+      where: {
+        courseId,
+      },
+    });
+
     await prisma.section.create({
       data: {
-        title: "New section",
+        title: `New section ${(totalSection + 1).toString()}`,
         courseId,
+        index: totalSection,
       },
     });
   },
@@ -76,7 +83,14 @@ export const CourseServices = {
       include: {
         sections: {
           include: {
-            lessons: true,
+            lessons: {
+              orderBy: {
+                index: "asc",
+              },
+            },
+          },
+          orderBy: {
+            index: "asc",
           },
         },
       },
@@ -85,10 +99,42 @@ export const CourseServices = {
     return data;
   },
 
+  deleteSection: async (sectionId: string) => {
+    await prisma.section.delete({
+      where: {
+        id: sectionId,
+      },
+    });
+  },
+
+  updateSection: async (section: Pick<Section, "id" | "title">) => {
+    await prisma.section.update({
+      where: {
+        id: section.id,
+      },
+      data: {
+        title: section.title,
+      },
+    });
+  },
+
   deleteLesson: async (lessonId: string) => {
     await prisma.lesson.delete({
       where: {
         id: lessonId,
+      },
+    });
+  },
+
+  updateLesson: async (lesson: Pick<Lesson, "id" | "title" | "videoUrl">) => {
+    await prisma.lesson.update({
+      where: {
+        id: lesson.id,
+      },
+      data: {
+        title: lesson.title,
+        slug: slugify(lesson.title, { lower: true }),
+        videoUrl: lesson.videoUrl,
       },
     });
   },

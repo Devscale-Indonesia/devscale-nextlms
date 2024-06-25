@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.600.0",
+    "@headlessui/react": "^2.1.0",
     "@prisma/client": "^5.15.1",
     "arctic": "^1.9.1",
     "bcrypt": "^5.1.1",
+    "jotai": "^2.8.3",
     "jsonwebtoken": "^9.0.2",
     "nanoid": "^5.0.7",
     "next": "15.0.0-canary.40",
