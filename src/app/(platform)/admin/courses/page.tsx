@@ -8,7 +8,7 @@ export default async function Page() {
   const courses = await CourseServices.getAllCourses();
 
   return (
-    <main className="space-y-8">
+    <main className="space-y-8 p-12">
       <section className="flex items-center justify-between">
         <h3>Courses</h3>
         <Button className="w-fit" size="sm">

@@ -45,6 +45,7 @@ model Course {
   coverImage String
   isPublished Boolean @default(false)
   sections Section[]
+  flashSales FlashSale?
 }
 
 model Section {
@@ -65,4 +66,11 @@ model Lesson {
   isPreview Boolean @default(false)
   sectionId String
   section Section @relation(fields: [sectionId], references: [id])
+}
+
+model FlashSale {
+  id String @id @default(cuid())
+  newAmount Int
+  courseId String @unique
+  course Course @relation(fields: [courseId], references: [id])
 }

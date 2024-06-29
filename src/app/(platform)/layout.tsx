@@ -22,7 +22,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
           <Menu label="Users" href="/admin/users" />
         </section>
       </aside>
-      <main className="h-screen w-[calc(100%-260px)] overflow-y-auto bg-white p-8">{children}</main>
+      <main className="h-screen w-[calc(100%-260px)] overflow-y-auto bg-white">{children}</main>
     </div>
   );
 }
