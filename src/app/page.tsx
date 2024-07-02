@@ -1,10 +1,10 @@
 import Image from "next/image";
 
+import { Button } from "@/components/button";
 import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
-import { CourseServices } from "@/services/course.services";
 import { currencyFormat } from "@/libs/currency-format";
-import { Button } from "@/components/button";
+import { CourseServices } from "@/services/course.services";
 
 export default async function Home() {
   const courses = await CourseServices.getAllCourses();
