@@ -63,6 +63,9 @@ export const CourseServices = {
       orderBy: {
         title: "asc",
       },
+      include: {
+        flashSales: true,
+      },
     });
 
     return data;
