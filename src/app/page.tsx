@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/button";
 import { Footer } from "@/components/shared/footer";
@@ -38,7 +39,7 @@ export default async function Home() {
                 <h4>{course.title}</h4>
                 <div className="overflow-hidden rounded-xl bg-white">
                   <Image
-                    src={`${process.env.R2_PUBLIC_URL}/devscale-nextlms/courses/${course.id}/${course.coverImage}`}
+                    src={`${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/devscale-nextlms/courses/${course.id}/${course.coverImage}`}
                     alt={course.title}
                     width={1000}
                     height={500}
@@ -51,9 +52,11 @@ export default async function Home() {
                   <Button size="sm" variant="secondary" className="col-span-2 shadow-slate-600">
                     Buy {course.flashSales?.id ? currencyFormat(course.flashSales.newAmount) : currencyFormat(course.price)}
                   </Button>
-                  <Button size="sm" variant="secondary" className="shadow-slate-600">
-                    View
-                  </Button>
+                  <Link href={`/${course.slug}`}>
+                    <Button size="sm" variant="secondary" className="shadow-slate-600">
+                      View
+                    </Button>
+                  </Link>
                 </div>
               </main>
             );

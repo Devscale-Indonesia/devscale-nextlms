@@ -9,10 +9,11 @@ const envSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().min(1),
   GOOGLE_CLIENT_SECRET: z.string().min(1),
   GOOGLE_REDIRECT_URI: z.string().min(1),
-  R2_PUBLIC_URL: z.string().min(1),
+  NEXT_PUBLIC_R2_PUBLIC_URL: z.string().min(1),
   R2_ACCESS_ID: z.string().min(1),
   R2_SECRET_KEY: z.string().min(1),
   R2_S3API_URL: z.string().min(1),
+  MAYAR_API_KEY: z.string().min(1),
 });
 
 const envParse = envSchema.safeParse({

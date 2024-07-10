@@ -23,7 +23,7 @@ export default async function Page() {
               <div>
                 <Image
                   alt={flashsale.course.title}
-                  src={`${process.env.R2_PUBLIC_URL}/devscale-nextlms/courses/${flashsale.course.id}/${flashsale.course.coverImage}`}
+                  src={`${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/devscale-nextlms/courses/${flashsale.course.id}/${flashsale.course.coverImage}`}
                   width={160}
                   height={100}
                   className="rounded-xl"

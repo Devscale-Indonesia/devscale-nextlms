@@ -27,6 +27,8 @@ model User {
   updatedAt DateTime @updatedAt
   verificationCode VerificationCode?
   certificates Certificate[]
+  transactions Transaction[]
+  coursesAccess CourseAccess[]
 }
 
 model VerificationCode {
@@ -48,6 +50,8 @@ model Course {
   sections Section[]
   certificates Certificate[]
   flashSales FlashSale?
+  transactions Transaction[]
+  coursesAccess CourseAccess[]
 }
 
 model Section {
@@ -90,4 +94,31 @@ model Certificate {
   userId String
   user User @relation(fields: [userId], references: [id])
   status RequestStatus @default(NO_REQUEST)
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
+
+model Transaction {
+  id String @id @default(cuid())
+  amount Int
+  paymentStatus PaymentStatus @default(UNPAID)
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  courseId String
+  course Course @relation(fields: [courseId], references: [id])
+  paymentLink String
+  transactionId String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CourseAccess {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  courseId String
+  course Course @relation(fields: [courseId], references: [id])
 }
