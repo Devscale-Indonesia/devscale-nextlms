@@ -71,6 +71,23 @@ export const CourseServices = {
     return data;
   },
 
+  getUserCourses: async (userId: string) => {
+    const courseAccess = await prisma.courseAccess.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        course: {
+          include: {
+            certificates: true,
+          },
+        },
+      },
+    });
+
+    return courseAccess;
+  },
+
   getCourseDetail: async (idOrSlug: string) => {
     const data = await prisma.course.findFirst({
       where: {
@@ -101,6 +118,23 @@ export const CourseServices = {
     });
 
     return data;
+  },
+
+  getLessonDetail: async (idOrSlug: string) => {
+    const lesson = await prisma.lesson.findFirst({
+      where: {
+        OR: [
+          {
+            id: idOrSlug,
+          },
+          {
+            slug: idOrSlug,
+          },
+        ],
+      },
+    });
+
+    return lesson;
   },
 
   deleteSection: async (sectionId: string) => {
