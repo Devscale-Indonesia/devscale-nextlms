@@ -28,7 +28,9 @@ export default async function Page() {
               <section className="space-y-3 p-4">
                 <div>{course.title}</div>
                 <div className="grid grid-cols-2 gap-3">
-                  <Button size="sm">Stats</Button>
+                  <Link href={`/admin/courses/${course.slug}/stats`}>
+                    <Button size="sm">Stats</Button>
+                  </Link>
                   <Link href={`/admin/courses/${course.slug}`}>
                     <Button size="sm">Edit Content</Button>
                   </Link>

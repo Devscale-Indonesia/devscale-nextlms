@@ -9,6 +9,7 @@ import { Card } from "@/components/card";
 import { lessonDetailAtom, openLessonEditModalAtom } from "@/context/atom";
 
 import { deleteLessonAction } from "./action.delete-lesson";
+import { markAsPreviewAction, unmarkAsPreviewAction } from "./action.mark-free";
 
 interface Props {
   lesson: Lesson;
@@ -41,6 +42,21 @@ export const LessonCard = ({ lesson, index }: Props) => {
                 <div>{lesson.title}</div>
               </div>
               <div className="flex gap-2">
+                {!lesson.isPreview ? (
+                  <form action={markAsPreviewAction}>
+                    <input name="lessonId" value={lesson.id} type="hidden" />
+                    <Button size="sm" variant="secondary" className="w-fit">
+                      Mark as preview
+                    </Button>
+                  </form>
+                ) : (
+                  <form action={unmarkAsPreviewAction}>
+                    <input name="lessonId" value={lesson.id} type="hidden" />
+                    <Button size="sm" variant="secondary" className="w-fit">
+                      Unmark as preview
+                    </Button>
+                  </form>
+                )}
                 <Button
                   onClick={() => {
                     setOpenModal(true);

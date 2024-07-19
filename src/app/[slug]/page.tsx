@@ -9,6 +9,7 @@ import { currencyFormat } from "@/libs/currency-format";
 import { CourseServices } from "@/services/course.services";
 
 import { buyCourseAction } from "./action";
+import { PreviewBtn } from "./components/preview";
 
 interface Props {
   params: {
@@ -26,11 +27,13 @@ export default async function Page({ params }: Props) {
   return (
     <main>
       <Header />
-      <section className="space-y-4 bg-slate-950 p-24 text-white">
-        <h2>{course.title}</h2>
-        <h3 className="w-1/2 whitespace-pre-line font-normal text-indigo-200">{course.description}</h3>
+      <section className="bg-slate-950 p-24 text-white">
+        <div className="m-auto max-w-7xl space-y-4">
+          <h2>{course.title}</h2>
+          <h3 className="w-1/2 whitespace-pre-line font-normal text-indigo-200">{course.description}</h3>
+        </div>
       </section>
-      <section className="mx-24 my-12 grid grid-cols-3 gap-12">
+      <section className="m-auto my-12 grid max-w-7xl grid-cols-3 gap-12">
         <div className="col-span-2 space-y-4">
           {course.sections.map((section) => {
             return (
@@ -39,8 +42,9 @@ export default async function Page({ params }: Props) {
                 <div className="space-y-4">
                   {section.lessons.map((lesson) => {
                     return (
-                      <Card key={lesson.id}>
+                      <Card key={lesson.id} className="flex items-center justify-between p-4">
                         <div>{lesson.title}</div>
+                        {lesson.isPreview && <PreviewBtn videoUrl={lesson.videoUrl} />}
                       </Card>
                     );
                   })}
@@ -49,7 +53,7 @@ export default async function Page({ params }: Props) {
             );
           })}
         </div>
-        <div className="space-y-4">
+        <Card className="-mt-32 h-fit space-y-4 bg-white p-4">
           <Image
             src={`${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/devscale-nextlms/courses/${course.id}/${course.coverImage}`}
             alt={course.title}
@@ -64,7 +68,7 @@ export default async function Page({ params }: Props) {
             <input type="hidden" value={course.flashSales ? course.flashSales.newAmount : course.price} name="amount" />
             <Button>Buy {currencyFormat(course.flashSales ? course.flashSales.newAmount : course.price)}</Button>
           </form>
-        </div>
+        </Card>
       </section>
       <Footer />
     </main>

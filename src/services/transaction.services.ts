@@ -55,4 +55,63 @@ export const TransactionServices = {
 
     return transaction;
   },
+
+  getTransactions: async () => {
+    const transactions = await prisma.transaction.findMany({
+      include: {
+        course: true,
+        user: true,
+      },
+    });
+
+    return transactions;
+  },
+
+  getTransactionsByCourse: async (idOrSlug: string) => {
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        OR: [
+          {
+            id: idOrSlug,
+          },
+          {
+            course: {
+              slug: idOrSlug,
+            },
+          },
+        ],
+      },
+      include: {
+        course: true,
+        user: true,
+      },
+    });
+
+    return transactions;
+  },
+
+  getUserTransactions: async (userId: string) => {
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        course: true,
+      },
+    });
+
+    return transactions;
+  },
+
+  getCurrentRevenues: async () => {
+    const currentRevenues = await prisma.transaction.findMany({
+      select: {
+        amount: true,
+      },
+    });
+
+    const totalAmount = currentRevenues.reduce((currValue, trx) => trx.amount + currValue, 0);
+
+    return totalAmount;
+  },
 };
